@@ -2,12 +2,12 @@
   margin: 20px 50px;
   display: flex;
   .left-container {
-    flex: 1 0 30%;
+    flex: 1 0 20%;
     border: 1px solid;
     padding: 20px;
   }
   .right-container {
-    flex: 1 0 60%;
+    flex: 1 0 70%;
     border: 1px solid;
     padding: 20px;
   }
@@ -28,4 +28,8 @@
   text-align: center;
   padding: 50px;
   font-size: 18px;
+}
+.view-time-series {
+  text-align: end;
+  padding-top: 20px;
 }

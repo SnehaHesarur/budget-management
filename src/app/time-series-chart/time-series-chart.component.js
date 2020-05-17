@@ -4,8 +4,9 @@ import FusionCharts from 'fusioncharts'
 import TimeSeries from 'fusioncharts/fusioncharts.timeseries'
 import ReactFC from 'react-fusioncharts'
 import moment from 'moment'
-ReactFC.fcRoot(FusionCharts, TimeSeries);
+import './time-series-chart.component.scss'
 
+ReactFC.fcRoot(FusionCharts, TimeSeries);
 const schema = [{
   "name": "Date",
   "type": "date",
@@ -34,7 +35,11 @@ class TimeSeriesChart extends React.Component {
           }
       };
   }
-  // We are creating our DataStore immediately after a component is mounted
+
+  handleBack = () => {
+    this.props.history.push('/')
+  }
+
   componentDidMount() {
     const billsCopy = this.props.bills
     billsCopy.sort((a, b) => {
@@ -56,7 +61,8 @@ class TimeSeriesChart extends React.Component {
   }
   render() {
       return (
-        <div>
+        <div className='time-series-chart'>
+          <div className='back' onClick={this.handleBack}>{'<--- Back'}</div>
           {
             this.state.timeseriesDs.dataSource.data ? <ReactFC {...this.state.timeseriesDs} /> : 'loading'
           }

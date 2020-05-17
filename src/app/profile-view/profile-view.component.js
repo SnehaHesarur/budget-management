@@ -79,7 +79,6 @@ function ProfileView (props) {
       </div>
       <div className='right-container'>
         <div className='bills-main-container-header'>
-          <div className='current-month'>Month: {moment().format('MMM, YYYY')}</div>
           <div className='actions'>
             <Button className='add-bill-btn' variant="contained" color="primary" onClick={handleOpenAddBill}>Add Bill</Button>
             <Button variant="contained" color="primary" onClick={handleOpenAddBudget}>Update Budget</Button>

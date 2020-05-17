@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Button } from '@material-ui/core'
 import './profile-view.component.scss'
-import moment from 'moment'
 import SingleBillView from '../single-bill-view/single-bill-view.component';
 import FiltersView from '../common/filters-view/filters.component'
 import AddBudgetDialog from '../add-budget/add-budget.component'

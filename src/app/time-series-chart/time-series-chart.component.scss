@@ -1,4 +1,4 @@
-.time-series-chart {
+.time-series-chart-container {
   padding-top: 20px;
   .back {
     font-size: 16px;
@@ -7,5 +7,15 @@
     display: inline-block;
     padding-left: 5%;
     margin-bottom: 30px;
+  }
+  .time-series-header {
+    text-align: center;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  .time-series-chart {
+    display: flex;
+    justify-content: center;
   }
 }

@@ -69,11 +69,16 @@ class TimeSeriesChart extends React.Component {
   }
   render() {
       return (
-        <div className='time-series-chart'>
+        <div className='time-series-chart-container'>
           <div className='back' onClick={this.handleBack}>{'<--- Back'}</div>
-          {
-            this.state.timeseriesDs.dataSource.data ? <ReactFC {...this.state.timeseriesDs} /> : 'loading'
-          }
+          <div className='time-series-header'>
+            Time Series Chart
+          </div>
+          <div className='time-series-chart'>
+            {
+              this.state.timeseriesDs.dataSource.data ? <ReactFC {...this.state.timeseriesDs} /> : 'loading'
+            }
+          </div>
         </div>
       )
   }

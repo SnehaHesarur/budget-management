@@ -1,3 +1,5 @@
+import { getUUid } from "../utils/misc-utils"
+
 export const setBudget = (data) => ({
   type: 'SET_BUDGET',
   payload: data
@@ -5,7 +7,7 @@ export const setBudget = (data) => ({
 
 export const addNewBill = (data) => ({
   type: 'ADD_NEW_BILLS',
-  payload: data
+  payload: {...data, id: getUUid()}
 })
 
 export const deleteBill = (data) => ({

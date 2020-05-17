@@ -1,5 +1,6 @@
 const initialState = {
   totalBudget: 0,
+  totalBillAmount: 44810,
   bills: {
     allBills: [
       {
@@ -239,16 +240,19 @@ export default (state = initialState, action) => {
           ...state.bills,
           allBills: allBillsCopy,
           [action.payload.category]: filterCategory
-        }
+        },
+        totalBillAmount: state.totalBillAmount + Number(action.payload.amount)
       }
     }
     case 'EDIT_BILL': {
       const allBillsCopy = [...state.bills.allBills]
+      let totalBillAmount = state.totalBillAmount
       for (let i = 0; i < allBillsCopy.length; i++) {
         const item = allBillsCopy[i]
         if (item.id === action.payload.id) {
           allBillsCopy.splice(i, 1, action.payload)
-          break;
+          totalBillAmount = (totalBillAmount - Number(item.amount)) + Number(action.payload.amount)
+          break
         }
       }
 
@@ -257,7 +261,7 @@ export default (state = initialState, action) => {
         const item = filterCategory[i]
         if (item.id === action.payload.id) {
           filterCategory.splice(i, 1, action.payload)
-          break;
+          break
         }
       }
 
@@ -267,7 +271,8 @@ export default (state = initialState, action) => {
           ...state.bills,
           allBills: allBillsCopy,
           [action.payload.category]: filterCategory
-        }
+        },
+        totalBillAmount
       }
     }
     case 'DELETE_BILL': {
@@ -295,7 +300,8 @@ export default (state = initialState, action) => {
           ...state.bills,
           allBills: allBillsCopy,
           [action.payload.category]: filterCategory
-        }
+        },
+        totalBillAmount: state.totalBillAmount - Number(action.payload.amount)
       }
     }
     default:

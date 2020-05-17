@@ -11,7 +11,7 @@ import AddBillDialog from '../add-bills/add-bills.component'
 import { deleteBill } from '../bill-management/bill-management.action-creator'
 
 function ProfileView (props) {
-  const { bills, totalBudget, deleteBill, optimalPayments } = props
+  const { bills, totalBudget, deleteBill, optimalPayments, totalBillAmount } = props
   const [filter, setFilter] = useState('allBills')
   const [billsToDisplay, setBillsToDisplay] = useState()
   const [addBudgetOpen, setAddBudgetOpen] = useState(false)
@@ -95,7 +95,7 @@ function ProfileView (props) {
             </div>
             <div className='item unpaid'>
               <div className='label'>Pending</div>
-              <div className='content'>Rs. 00</div>
+              <div className='content'>{`Rs. ${totalBillAmount}`}</div>
             </div>
           </div>
           <div className='remaining-amount'>
@@ -133,7 +133,8 @@ function mapStateToProps (state) {
   return {
     bills: state.billManagement.bills,
     totalBudget: state.billManagement.totalBudget,
-    optimalPayments: state.billManagement.optimalPayments
+    optimalPayments: state.billManagement.optimalPayments,
+    totalBillAmount: state.billManagement.totalBillAmount
   }
 }
 

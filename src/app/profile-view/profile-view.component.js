@@ -99,7 +99,7 @@ function ProfileView (props) {
             </div>
           </div>
           <div className='remaining-amount'>
-            {`Available budget after bill payments: Rs: 00`}
+            {`Available budget after bill payments: Rs: ${totalBudget}`}
           </div>
         </div>
         <div className='budget-container'>

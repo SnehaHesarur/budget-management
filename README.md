@@ -4,7 +4,7 @@ This is a budget management tool with the following options
 1. Add your monhtly budget
 2. Add bills
 3. Edit or delete bills as needed
-4. see the optiomal payments for the bills once the budget is added
+4. See the optimal payments for the bills once the budget is added
 5. Filter the bills based on categories
 6. View a time series of the bills that are added
 

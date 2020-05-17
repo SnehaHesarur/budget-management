@@ -1,14 +1,18 @@
 .single-bill-container {
   padding: 15px 10px;
   position: relative;
-  &:nth-child(odd) {
-    background-color: aliceblue;
-  }
+  width: 30%;
+  border: 1px solid darkgrey;
+  margin-right: 10px;
+  margin-bottom: 10px;
   &.optimal-payment {
-    border: 2px solid green;
+    background-color: aliceblue;
   }
   .bill-desc {
     font-size: 16px;
+    overflow: hidden;
+    width: 60%;
+    text-overflow: ellipsis;
   }
   .bill-category {
     font-size: 14px;

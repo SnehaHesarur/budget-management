@@ -5,10 +5,10 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 function SingleBillView (props) {
-  const { bill, handleEdit, handleDelete } = props
+  const { bill, handleEdit, handleDelete, optimalPayments } = props
 
   return (
-    <div key={bill.id} className='single-bill-container'>
+    <div key={bill.id} className={'single-bill-container' + (optimalPayments.indexOf(bill.id) >= 0 ? ' optimal-payment' : '')}>
       <div className='bill-desc'>{bill.description}</div>
       <div className='bill-category'>{bill.category}</div>
       <div className='bill-amount'>{bill.amount}</div>

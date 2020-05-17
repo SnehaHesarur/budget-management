@@ -11,7 +11,7 @@ import AddBillDialog from '../add-bills/add-bills.component'
 import { deleteBill } from '../bill-management/bill-management.action-creator'
 
 function ProfileView (props) {
-  const { bills, totalBudget, deleteBill } = props
+  const { bills, totalBudget, deleteBill, optimalPayments } = props
   const [filter, setFilter] = useState('allBills')
   const [billsToDisplay, setBillsToDisplay] = useState()
   const [addBudgetOpen, setAddBudgetOpen] = useState(false)
@@ -33,7 +33,7 @@ function ProfileView (props) {
       <div className='bills-list-container'>
         {
           billsToDisplay.map((bill) => {
-            return <SingleBillView handleEdit={handleEdit} handleDelete={handleDelete} bill={bill} key={bill.id} />
+            return <SingleBillView optimalPayments={optimalPayments} handleEdit={handleEdit} handleDelete={handleDelete} bill={bill} key={bill.id} />
           })
         }
       </div>
@@ -129,7 +129,8 @@ function ProfileView (props) {
 function mapStateToProps (state) {
   return {
     bills: state.billManagement.bills,
-    totalBudget: state.billManagement.totalBudget
+    totalBudget: state.billManagement.totalBudget,
+    optimalPayments: state.billManagement.optimalPayments
   }
 }
 

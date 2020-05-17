@@ -100,15 +100,37 @@ const initialState = {
       "amount": "3430",
       "date": "01-18-2020"
     }]
-  }
+  },
+  optimalPayments: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_BUDGET': {
+      const optimalPayments = []
+      const billsCopy = [...state.bills.allBills]
+      const billsCount = billsCopy.length
+      let availableBudget = action.payload
+
+      if (action.payload && billsCount > 0) {
+        if (billsCount === 1) {
+          optimalPayments.push(billsCopy[0].id)
+        } else {
+          billsCopy.sort((a, b) => {
+            return Number(b.amount) - Number(a.amount)
+          })
+          billsCopy.forEach((bill) => {
+            if (Number(bill.amount) <=  availableBudget && availableBudget > 0) {
+              optimalPayments.push(bill.id)
+              availableBudget = availableBudget - Number(bill.amount)
+            }
+          })
+        }
+      }
       return {
         ...state,
-        totalBudget: action.payload
+        totalBudget: action.payload,
+        optimalPayments
       }
     }
     case 'ADD_NEW_BILLS': {

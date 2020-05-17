@@ -1,0 +1,26 @@
+.update-budget-dialog {
+  min-width: 500px;
+}
+.dialog-header {
+  padding: 20px;
+  background-color: lightblue;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  .close {
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+.dialog-content {
+  padding: 20px;
+  .label {
+    padding-bottom: 10px;
+  }
+}
+.dialog-footer {
+  box-shadow: 0 0 4px 0 rgba(166, 166, 166, 0.59);
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}

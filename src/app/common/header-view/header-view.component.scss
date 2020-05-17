@@ -1,0 +1,14 @@
+.header-view {
+  position: sticky;
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  box-shadow: 0 2px 4px 0 rgba(125, 125, 125, 0.5);
+  top: 0px;
+  z-index: 1;
+  background-color: white;
+  .header-content {
+    text-transform: capitalize;
+    font-size: 20px;
+  }
+}

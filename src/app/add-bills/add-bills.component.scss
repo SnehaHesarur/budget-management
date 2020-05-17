@@ -1,0 +1,14 @@
+.add-bill-dialog {
+  min-width: 600px;
+  .form-content {
+    padding: 0px 10px 20px;
+    display: flex;
+    align-items: baseline;
+    .label {
+      flex: 1 0 30%;
+    }
+    .bill-input {
+      flex: 1 0 70%;
+    }
+  }
+}

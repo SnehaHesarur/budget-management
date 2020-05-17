@@ -1,0 +1,20 @@
+.single-bill-container {
+  padding: 15px 10px;
+  &:nth-child(odd) {
+    background-color: aliceblue;
+  }
+  .bill-desc {
+    font-size: 16px;
+  }
+  .bill-category {
+    font-size: 14px;
+    color: grey;
+  }
+  .bill-amount {
+    padding-top: 10px;
+    font-size: 15px;
+  }
+  .bill-date {
+    font-size: 12px;
+  }
+}

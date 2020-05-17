@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Button } from '@material-ui/core'
 import './profile-view.component.scss'
 import moment from 'moment'
@@ -7,13 +8,15 @@ import SingleBillView from '../single-bill-view/single-bill-view.component';
 import FiltersView from '../common/filters-view/filters.component'
 import AddBudgetDialog from '../add-budget/add-budget.component'
 import AddBillDialog from '../add-bills/add-bills.component'
+import { deleteBill } from '../bill-management/bill-management.action-creator'
 
 function ProfileView (props) {
-  const { bills, totalBudget } = props
+  const { bills, totalBudget, deleteBill } = props
   const [filter, setFilter] = useState('allBills')
   const [billsToDisplay, setBillsToDisplay] = useState()
   const [addBudgetOpen, setAddBudgetOpen] = useState(false)
   const [addOrEditBillOpen, setAddOrEditBillOpen] = useState(false)
+  const [editBillInfo, setEditBillInfo] = useState()
 
   const handleFilter = (value) => {
     setFilter(value)
@@ -30,7 +33,7 @@ function ProfileView (props) {
       <div className='bills-list-container'>
         {
           billsToDisplay.map((bill) => {
-            return <SingleBillView bill={bill} key={bill.id} />
+            return <SingleBillView handleEdit={handleEdit} handleDelete={handleDelete} bill={bill} key={bill.id} />
           })
         }
       </div>
@@ -47,10 +50,22 @@ function ProfileView (props) {
 
   const handleCloseAddBill = () => {
     setAddOrEditBillOpen(false)
+    if (editBillInfo) {
+      setEditBillInfo()
+    }
   }
 
   const handleOpenAddBill = () => {
     setAddOrEditBillOpen(true)
+  }
+
+  const handleEdit = (bill) => {
+    setEditBillInfo(bill)
+    handleOpenAddBill()
+  }
+
+  const handleDelete = (bill) => {
+    deleteBill(bill)
   }
 
   useEffect(() => {
@@ -104,6 +119,7 @@ function ProfileView (props) {
         addOrEditBillOpen &&
           <AddBillDialog
             handleOnClose={handleCloseAddBill}
+            editBillInfo={editBillInfo}
           />
       }
     </div>
@@ -117,4 +133,11 @@ function mapStateToProps (state) {
   }
 }
 
-export default (connect(mapStateToProps, null)(ProfileView))
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    deleteBill
+  }, dispatch)
+}
+
+
+export default (connect(mapStateToProps, mapDispatchToProps)(ProfileView))

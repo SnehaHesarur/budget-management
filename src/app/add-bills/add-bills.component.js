@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Dialog, Input, Button, TextField, Select, MenuItem } from '@material-ui/core'
-import { addNewBill } from '../bill-management/bill-management.action-creator'
+import { addNewBill, editBill } from '../bill-management/bill-management.action-creator'
 
 import './add-bills.component.scss'
 import moment from 'moment'
@@ -10,7 +10,7 @@ import { FILTERS_DATA } from '../constants/misc.constants'
 
 const categroyFilters = FILTERS_DATA.slice(1, FILTERS_DATA.length - 1)
 function AddBillDialog (props) {
-  const { handleOnClose, addNewBill} = props
+  const { handleOnClose, addNewBill, editBillInfo, editBill} = props
   const [fields, setFields] = useState({
     date: moment().format('YYYY-MM-DD')
   })
@@ -21,6 +21,15 @@ function AddBillDialog (props) {
 
     setFields(fieldsCopy)
   }
+
+  useEffect(() => {
+    if (editBillInfo) {
+      setFields({
+        ...editBillInfo,
+        date: moment(editBillInfo.date, 'MM-DD-YYYY').format('YYYY-MM-DD')
+      })
+    }
+  }, [editBillInfo])
 
   const renderCategorySelect = () => {
     return (
@@ -46,7 +55,17 @@ function AddBillDialog (props) {
   const handleAddBill = () => {
     const isValid = validateForm()
     if (isValid) {
-      addNewBill(fields)
+      if (fields.id) {
+        editBill({
+          ...fields,
+          date: moment(fields.date, 'YYYY-MM-DD').format('MM-DD-YYYY')
+        })
+      } else {
+        addNewBill({
+          ...fields,
+          date: moment(fields.date, 'YYYY-MM-DD').format('MM-DD-YYYY')
+        })
+      }
       handleOnClose()
     }
   }
@@ -68,7 +87,7 @@ function AddBillDialog (props) {
       }}
     >
       <div className='dialog-header'>
-        Add Bill
+        {fields.id ? 'Edit Bill' : 'Add Bill'}
         <span className='close' onClick={handleOnClose}>X</span>
       </div>
       <div className='dialog-content'>
@@ -100,7 +119,7 @@ function AddBillDialog (props) {
         </div>
       </div>
       <div className='dialog-footer'>
-        <Button onClick={handleAddBill}>Add</Button>
+        <Button onClick={handleAddBill}>{fields.id ? 'Edit' : 'Add'}</Button>
       </div>
     </Dialog>
   )
@@ -108,7 +127,8 @@ function AddBillDialog (props) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    addNewBill
+    addNewBill,
+    editBill
   }, dispatch)
 }
 

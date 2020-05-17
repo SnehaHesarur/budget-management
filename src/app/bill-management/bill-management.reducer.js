@@ -40,14 +40,14 @@ const initialState = {
       {
         "id": 6,
         "description": "Laundry",
-        "category": "Personal Care",
+        "category": "personalCare",
         "amount": "320",
         "date": "01-14-2020"
       },
       {
         "id": 7,
         "description": "Vacation",
-        "category": "Travel",
+        "category": "travel",
         "amount": "3430",
         "date": "01-18-2020"
       }
@@ -89,14 +89,14 @@ const initialState = {
     personalCare: [{
       "id": 6,
       "description": "Laundry",
-      "category": "Personal Care",
+      "category": "personalCare",
       "amount": "320",
       "date": "01-14-2020"
     }],
     travel:[{
       "id": 7,
       "description": "Vacation",
-      "category": "Travel",
+      "category": "travel",
       "amount": "3430",
       "date": "01-18-2020"
     }]
@@ -128,13 +128,59 @@ export default (state = initialState, action) => {
       }
     }
     case 'EDIT_BILL': {
+      const allBillsCopy = [...state.bills.allBills]
+      for (let i = 0; i < allBillsCopy.length; i++) {
+        const item = allBillsCopy[i]
+        if (item.id === action.payload.id) {
+          allBillsCopy.splice(i, 1, action.payload)
+          break;
+        }
+      }
+
+      const filterCategory = [...state.bills[action.payload.category]]
+      for (let i = 0; i < filterCategory.length; i++) {
+        const item = filterCategory[i]
+        if (item.id === action.payload.id) {
+          filterCategory.splice(i, 1, action.payload)
+          break;
+        }
+      }
+
       return {
-        ...state
+        ...state,
+        bills: {
+          ...state.bills,
+          allBills: allBillsCopy,
+          [action.payload.category]: filterCategory
+        }
       }
     }
     case 'DELETE_BILL': {
+      const allBillsCopy = [...state.bills.allBills]
+      for (let i = 0; i < allBillsCopy.length; i++) {
+        const item = allBillsCopy[i]
+        if (item.id === action.payload.id) {
+          allBillsCopy.splice(i, 1)
+          break;
+        }
+      }
+
+      const filterCategory = [...state.bills[action.payload.category]]
+      for (let i = 0; i < filterCategory.length; i++) {
+        const item = filterCategory[i]
+        if (item.id === action.payload.id) {
+          filterCategory.splice(i, 1)
+          break;
+        }
+      }
+
       return {
-        ...state
+        ...state,
+        bills: {
+          ...state.bills,
+          allBills: allBillsCopy,
+          [action.payload.category]: filterCategory
+        }
       }
     }
     default:

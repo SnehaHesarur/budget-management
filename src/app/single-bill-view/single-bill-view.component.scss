@@ -1,5 +1,6 @@
 .single-bill-container {
   padding: 15px 10px;
+  position: relative;
   &:nth-child(odd) {
     background-color: aliceblue;
   }
@@ -16,5 +17,10 @@
   }
   .bill-date {
     font-size: 12px;
+  }
+  .action-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }

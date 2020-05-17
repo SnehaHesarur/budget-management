@@ -51,7 +51,7 @@ class TimeSeriesChart extends React.Component {
       existingData[bill.date] = bill.amount
     })
 
-    const datetimes = getDateTimes(billsCopy[0].date, billsCopy[billsCopy.length - 1].date)
+    const datetimes = billsCopy.length ? getDateTimes(billsCopy[0].date, billsCopy[billsCopy.length - 1].date) : getDateTimes(moment().startOf('month').format('MM-DD-YYYY'), moment().endOf('month').format('MM-DD-YYYY'))
     const data = datetimes.map((date) => {
       const formattedDate = moment(date).format('MM-DD-YYYY')
       return ([

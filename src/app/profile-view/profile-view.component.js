@@ -23,7 +23,7 @@ function ProfileView (props) {
 
   const renderEmptyView = () => {
     return (
-      <div className='empty-view'>Add new bills...</div>
+      <div className='empty-view'>No Bills Available...</div>
     )
   }
 

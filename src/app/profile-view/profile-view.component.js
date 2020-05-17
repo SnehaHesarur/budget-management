@@ -67,6 +67,10 @@ function ProfileView (props) {
     deleteBill(bill)
   }
 
+  const handleViewTimeSeries = () => {
+    props.history.push('/time-series')
+  }
+
   useEffect(() => {
     setBillsToDisplay(bills[filter])
   }, [bills, filter])
@@ -99,8 +103,8 @@ function ProfileView (props) {
           <div className='remaining-amount'>
             {`Available budget after bill payments: Rs: ${totalBudget}`}
           </div>
-          <div className='view-time-series'>
-            <a href='/time-series'>View Time Series</a>
+          <div className='view-time-series' onClick={handleViewTimeSeries}>
+            View Time Series
           </div>
         </div>
         <div className='budget-container'>

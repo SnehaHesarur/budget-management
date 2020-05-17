@@ -5,6 +5,7 @@ import TimeSeries from 'fusioncharts/fusioncharts.timeseries'
 import ReactFC from 'react-fusioncharts'
 import moment from 'moment'
 import './time-series-chart.component.scss'
+import { getDateTimes } from '../utils/date.utils'
 
 ReactFC.fcRoot(FusionCharts, TimeSeries);
 const schema = [{
@@ -29,7 +30,7 @@ class TimeSeriesChart extends React.Component {
                   caption: { text: 'Budget Management' },
                   data: null,
                   yAxis: [{
-                      connectNullData: true
+                    "connectNullData": "1"
                   }]
               }
           }
@@ -41,16 +42,24 @@ class TimeSeriesChart extends React.Component {
   }
 
   componentDidMount() {
-    const billsCopy = this.props.bills
+    const billsCopy = this.props.bills.allBills
     billsCopy.sort((a, b) => {
       return moment(a.date, 'MM-DD-YYYY') - moment(b.date, 'MM-DD-YYYY')
     })
-    const data = billsCopy.map((bill) => {
+    const existingData = {}
+    billsCopy.forEach((bill) => {
+      existingData[bill.date] = bill.amount
+    })
+
+    const datetimes = getDateTimes(billsCopy[0].date, billsCopy[billsCopy.length - 1].date)
+    const data = datetimes.map((date) => {
+      const formattedDate = moment(date).format('MM-DD-YYYY')
       return ([
-        bill.date,
-        bill.amount
+        formattedDate,
+        existingData[formattedDate] || 0
       ])
     })
+
     const fusionTable = new FusionCharts.DataStore().createDataTable(data, schema);
     const timeseriesDs = Object.assign({}, this.state.timeseriesDs)
     timeseriesDs.dataSource.data = fusionTable
@@ -72,7 +81,7 @@ class TimeSeriesChart extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    bills: state.billManagement.billsForChart
+    bills: state.billManagement.bills
   }
 }
 

@@ -22,7 +22,12 @@
 .budget-details {
   display: flex;
   justify-content: space-around;
-  padding: 15px 0px;
+  padding: 15px 0px 20px;
+  .label {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
 }
 .budget-container {
   padding: 20px;
@@ -39,6 +44,11 @@
 .view-time-series {
   text-align: end;
   padding-top: 20px;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    color: blue;
+  }
 }
 .add-bill-btn {
   margin-right: 10px !important;

@@ -17,7 +17,6 @@ function AddBillDialog (props) {
 
   const handleOnChange = (e) => {
     const fieldsCopy = {...fields}
-    debugger
     fieldsCopy[e.target.name] = e.target.value
 
     setFields(fieldsCopy)

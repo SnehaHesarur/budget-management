@@ -16,7 +16,6 @@ function ProfileView (props) {
   const [addOrEditBillOpen, setAddOrEditBillOpen] = useState(false)
 
   const handleFilter = (value) => {
-    debugger
     setFilter(value)
   }
 

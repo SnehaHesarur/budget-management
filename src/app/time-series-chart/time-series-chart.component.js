@@ -46,7 +46,6 @@ class TimeSeriesChart extends React.Component {
       return moment(a.date, 'MM-DD-YYYY') - moment(b.date, 'MM-DD-YYYY')
     })
     const data = billsCopy.map((bill) => {
-    console.log(bill.date)
       return ([
         bill.date,
         bill.amount

@@ -10,6 +10,9 @@
     flex: 1 0 70%;
     border: 1px solid;
     padding: 20px;
+    .actions {
+      margin: 10px 0px;
+    }
   }
 }
 .bills-main-container-header {
@@ -32,4 +35,7 @@
 .view-time-series {
   text-align: end;
   padding-top: 20px;
+}
+.add-bill-btn {
+  margin-right: 10px !important;
 }
